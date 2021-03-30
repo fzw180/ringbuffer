@@ -416,7 +416,7 @@ func (r *RingBuffer) makeSpace(len int) {
 	r.buf = newBuf
 }
 
-func (r *RingBuffer) free() int {
+func (r *RingBuffer) Free() int {
 	if r.w == r.r {
 		if r.isEmpty {
 			return r.size
