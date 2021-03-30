@@ -299,7 +299,7 @@ func (r *RingBuffer) Write(p []byte) (n int, err error) {
 		return 0, nil
 	}
 	n = len(p)
-	free := r.free()
+	free := r.Free()
 	if free < n {
 		r.makeSpace(n - free)
 	}
@@ -327,7 +327,7 @@ func (r *RingBuffer) Write(p []byte) (n int, err error) {
 }
 
 func (r *RingBuffer) WriteByte(c byte) error {
-	if r.free() < 1 {
+	if r.Free() < 1 {
 		r.makeSpace(1)
 	}
 
@@ -401,7 +401,7 @@ func (r *RingBuffer) Reset() {
 }
 
 func (r *RingBuffer) String() string {
-	return fmt.Sprintf("Ring Buffer: \n\tCap: %d\n\tReadable Bytes: %d\n\tWriteable Bytes: %d\n\tBuffer: %s\n", r.size, r.Length(), r.free(), r.buf)
+	return fmt.Sprintf("Ring Buffer: \n\tCap: %d\n\tReadable Bytes: %d\n\tWriteable Bytes: %d\n\tBuffer: %s\n", r.size, r.Length(), r.Free(), r.buf)
 }
 
 func (r *RingBuffer) makeSpace(len int) {
